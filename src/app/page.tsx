@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Code, Star, GitFork, ExternalLink } from 'lucide-react';
 import { GithubIcon } from '@/components/icons';
 import { useEffect, useState } from 'react';
+import { basePath } from '@/lib/config';
 
 interface GitHubRepo {
   id: number;
@@ -141,10 +143,11 @@ export default function HomePage() {
             transition={{ duration: 0.7, delay: 0.05, ease: 'easeOut' }}
             className="mb-8"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo.png"
+            <Image
+              src={`${basePath}/logo.png`}
               alt="DegraSoft"
+              width={96}
+              height={96}
               className="w-24 h-24 rounded-2xl mx-auto shadow-lg shadow-violet-500/20"
             />
           </motion.div>

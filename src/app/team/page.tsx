@@ -1,9 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Plus, Coffee, Brain, Music, Gamepad2, Send, Users, ExternalLink } from 'lucide-react';
 import { GithubIcon } from '@/components/icons';
 import { useEffect, useState } from 'react';
+import { basePath } from '@/lib/config';
 
 interface GitHubMember {
   id: number;
@@ -105,11 +107,12 @@ export default function TeamPage() {
           className="glass-card p-8 mb-8 text-center"
         >
           {/* Logo */}
-          <div className="w-24 h-24 rounded-2xl mx-auto mb-4 flex items-center justify-center overflow-hidden shadow-lg shadow-violet-500/20">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo.png"
+          <div className="w-24 h-24 rounded-2xl mx-auto mb-4 overflow-hidden shadow-lg shadow-violet-500/20">
+            <Image
+              src={`${basePath}/logo.png`}
               alt="DegraSoft"
+              width={96}
+              height={96}
               className="w-full h-full object-cover"
             />
           </div>

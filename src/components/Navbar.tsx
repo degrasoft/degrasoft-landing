@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SearchDialog from './SearchDialog';
+import { basePath } from '@/lib/config';
 
 const navLinks = [
   { href: '/', label: 'Главная' },
@@ -26,10 +28,11 @@ export default function Navbar() {
             href="/"
             className="flex items-center gap-2.5 text-lg font-bold hover:opacity-80 transition-opacity"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo.png"
+            <Image
+              src={`${basePath}/logo.png`}
               alt="DegraSoft"
+              width={32}
+              height={32}
               className="w-8 h-8 rounded-lg"
             />
             <span className="gradient-text">DegraSoft</span>

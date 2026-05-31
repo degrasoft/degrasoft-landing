@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NEXT_BASE_PATH: /degrasoft-landing
+          NEXT_PUBLIC_BASE_PATH: /degrasoft-landing
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

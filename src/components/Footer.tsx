@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import { Send } from 'lucide-react';
 import { GithubIcon } from './icons';
+import { basePath } from '@/lib/config';
 
 export default function Footer() {
   return (
@@ -7,10 +9,11 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5 text-zinc-500 text-sm">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo.png"
+            <Image
+              src={`${basePath}/logo.png`}
               alt="DegraSoft"
+              width={20}
+              height={20}
               className="w-5 h-5 rounded"
             />
             <span>DegraSoft</span>
