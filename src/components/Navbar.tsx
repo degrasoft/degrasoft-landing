@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SearchDialog from './SearchDialog';
 
@@ -24,10 +24,15 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-lg font-bold gradient-text hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2.5 text-lg font-bold hover:opacity-80 transition-opacity"
           >
-            <Code2 className="w-5 h-5 text-violet-400" />
-            DegraSoft
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt="DegraSoft"
+              className="w-8 h-8 rounded-lg"
+            />
+            <span className="gradient-text">DegraSoft</span>
           </Link>
 
           {/* Desktop nav */}

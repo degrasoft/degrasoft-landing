@@ -1,4 +1,4 @@
-import { Code2, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { GithubIcon } from './icons';
 
 export default function Footer() {
@@ -6,8 +6,13 @@ export default function Footer() {
     <footer className="relative z-10 mt-auto border-t border-white/5 bg-[#0a0a0f]/60 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-zinc-500 text-sm">
-            <Code2 className="w-4 h-4" />
+          <div className="flex items-center gap-2.5 text-zinc-500 text-sm">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt="DegraSoft"
+              className="w-5 h-5 rounded"
+            />
             <span>DegraSoft</span>
             <span className="text-zinc-700">•</span>
             <span className="text-zinc-600 italic">Навайбкожено при помощи нейронок</span>

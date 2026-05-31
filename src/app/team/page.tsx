@@ -1,18 +1,84 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, Plus, Coffee, Brain, Music, Gamepad2, Send } from 'lucide-react';
+import { Plus, Coffee, Brain, Music, Gamepad2, Send, Users, ExternalLink } from 'lucide-react';
 import { GithubIcon } from '@/components/icons';
+import { useEffect, useState } from 'react';
+
+interface GitHubMember {
+  id: number;
+  login: string;
+  avatar_url: string;
+  html_url: string;
+}
 
 const skills = [
-  { icon: Code2, label: 'Пишем код' },
   { icon: Coffee, label: 'Пьём кофе' },
   { icon: Brain, label: 'Думаем' },
   { icon: Music, label: 'Слушаем музыку' },
   { icon: Gamepad2, label: 'Иногда играем' },
 ];
 
+function MemberCard({ member, index }: { member: GitHubMember; index: number }) {
+  return (
+    <motion.a
+      href={member.html_url}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: 0.15 + index * 0.1 }}
+      className="glass-card p-6 flex flex-col items-center text-center group hover:border-violet-500/30 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-violet-500/5"
+    >
+      {/* Avatar */}
+      <div className="relative mb-4">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={member.avatar_url}
+          alt={member.login}
+          className="w-20 h-20 rounded-full border-2 border-white/10 group-hover:border-violet-500/40 transition-colors duration-300"
+        />
+        <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#0a0a0f] flex items-center justify-center">
+          <ExternalLink className="w-3 h-3 text-zinc-500 group-hover:text-violet-400 transition-colors" />
+        </div>
+      </div>
+
+      <h3 className="text-white font-semibold text-lg group-hover:text-violet-300 transition-colors">
+        {member.login}
+      </h3>
+      <p className="text-zinc-500 text-sm mt-1">
+        Участник организации
+      </p>
+    </motion.a>
+  );
+}
+
+function MemberSkeleton() {
+  return (
+    <div className="glass-card p-6 flex flex-col items-center text-center animate-pulse">
+      <div className="w-20 h-20 rounded-full bg-white/5 mb-4" />
+      <div className="h-5 bg-white/5 rounded w-24 mb-2" />
+      <div className="h-4 bg-white/5 rounded w-20" />
+    </div>
+  );
+}
+
 export default function TeamPage() {
+  const [members, setMembers] = useState<GitHubMember[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('https://api.github.com/orgs/degrasoft/members')
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setMembers(data);
+        }
+      })
+      .catch(() => setMembers([]))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div className="px-4 py-16 sm:py-24">
       <div className="max-w-3xl mx-auto">
@@ -31,16 +97,21 @@ export default function TeamPage() {
           </p>
         </motion.div>
 
-        {/* Team card */}
+        {/* Org card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="glass-card p-8 mb-8 text-center"
         >
-          {/* Avatar */}
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-violet-600 to-cyan-500 mx-auto mb-4 flex items-center justify-center text-4xl shadow-lg shadow-violet-500/20">
-            🐸
+          {/* Logo */}
+          <div className="w-24 h-24 rounded-2xl mx-auto mb-4 flex items-center justify-center overflow-hidden shadow-lg shadow-violet-500/20">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt="DegraSoft"
+              className="w-full h-full object-cover"
+            />
           </div>
 
           <h2 className="text-2xl font-bold text-white mb-1">DegraSoft</h2>
@@ -64,11 +135,45 @@ export default function TeamPage() {
           </div>
         </motion.div>
 
+        {/* Members section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mb-8"
+        >
+          <h2 className="text-2xl font-bold text-center mb-6">
+            <span className="gradient-text">Участники</span>
+            {' '}({members.length || '...'})
+          </h2>
+
+          {loading ? (
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[1, 2].map((i) => (
+                <MemberSkeleton key={i} />
+              ))}
+            </div>
+          ) : members.length > 0 ? (
+            <div className="grid sm:grid-cols-2 gap-4">
+              {members.map((member, i) => (
+                <MemberCard key={member.id} member={member} index={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="glass-card-sm p-8 text-center">
+              <Users className="w-10 h-10 text-zinc-600 mx-auto mb-3" />
+              <p className="text-zinc-500">
+                Не удалось загрузить участников. Попробуйте позже.
+              </p>
+            </div>
+          )}
+        </motion.div>
+
         {/* Join CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
           className="glass-card-sm p-8 text-center mb-8 border-dashed border-violet-500/30 group hover:border-violet-500/50 transition-all duration-300"
         >
           <div className="w-20 h-20 rounded-full border-2 border-dashed border-zinc-700 group-hover:border-violet-500/50 mx-auto mb-4 flex items-center justify-center transition-colors">

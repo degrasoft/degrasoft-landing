@@ -134,6 +134,21 @@ export default function HomePage() {
             </div>
           </motion.div>
 
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.05, ease: 'easeOut' }}
+            className="mb-8"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt="DegraSoft"
+              className="w-24 h-24 rounded-2xl mx-auto shadow-lg shadow-violet-500/20"
+            />
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
