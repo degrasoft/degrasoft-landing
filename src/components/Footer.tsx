@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { Send } from 'lucide-react';
 import { GithubIcon } from './icons';
-import { basePath } from '@/lib/config';
 
 export default function Footer() {
   return (
@@ -10,7 +9,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5 text-zinc-500 text-sm">
             <Image
-              src={`${basePath}/logo.png`}
+              src="/logo.png"
               alt="DegraSoft"
               width={20}
               height={20}

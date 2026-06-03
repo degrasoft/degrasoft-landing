@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { GithubIcon } from '@/components/icons';
-import { Star, GitFork, ExternalLink } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Star, GitFork, ExternalLink } from 'lucide-react';
 
 interface GitHubRepo {
   id: number;
@@ -43,7 +43,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="px-4 py-16 sm:py-24">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -53,52 +53,33 @@ export default function ProjectsPage() {
           <h1 className="text-3xl sm:text-4xl font-bold mb-4">
             Наши <span className="gradient-text">проекты</span>
           </h1>
-          <p className="text-zinc-400 text-lg max-w-lg mx-auto">
-            Открытые проекты для стримеров и не только. Всё на GitHub.
+          <p className="text-zinc-400 text-lg">
+            Всё открыто. Всё бесплатно. Всё на GitHub.
           </p>
         </motion.div>
 
         {loading ? (
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="space-y-4">
             {[1, 2].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="glass-card p-6 animate-pulse"
-              >
+              <div key={i} className="glass-card p-6 animate-pulse">
                 <div className="h-5 bg-white/5 rounded w-1/3 mb-3" />
                 <div className="h-4 bg-white/5 rounded w-2/3 mb-2" />
                 <div className="h-4 bg-white/5 rounded w-1/2" />
-              </motion.div>
+              </div>
             ))}
           </div>
-        ) : repos.length === 0 ? (
-          <div className="text-center py-16">
-            <p className="text-zinc-500 text-lg mb-4">Пока пусто... но это временно!</p>
-            <a
-              href="https://github.com/degrasoft"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-violet-500/30 transition-all"
-            >
-              <GithubIcon className="w-4 h-4" />
-              Заглянуть на GitHub
-            </a>
-          </div>
-        ) : (
-          <div className="grid sm:grid-cols-2 gap-6">
-            {repos.map((repo, index) => (
+        ) : repos.length > 0 ? (
+          <div className="space-y-4">
+            {repos.map((repo, i) => (
               <motion.a
                 key={repo.id}
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.12 }}
-                className="glass-card p-6 block group hover:border-violet-500/30 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/5"
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.1 }}
+                className="glass-card p-6 block group hover:border-violet-500/30 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg hover:shadow-violet-500/5"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2">
@@ -136,17 +117,30 @@ export default function ProjectsPage() {
               </motion.a>
             ))}
           </div>
+        ) : (
+          <div className="glass-card-sm p-8 text-center">
+            <GithubIcon className="w-10 h-10 text-zinc-600 mx-auto mb-3" />
+            <p className="text-zinc-500">
+              Не удалось загрузить проекты. Попробуйте позже.
+            </p>
+          </div>
         )}
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mt-12 text-center"
+          transition={{ delay: 0.5 }}
+          className="mt-8 text-center"
         >
-          <p className="text-zinc-600 text-sm italic">
-            Больше проектов — на GitHub. Форкайте, ставьте звёзды, присылайте PR.
-          </p>
+          <a
+            href="https://github.com/degrasoft"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-medium hover:shadow-lg hover:shadow-violet-500/25 transition-all duration-300 hover:scale-[1.03]"
+          >
+            <GithubIcon className="w-4 h-4" />
+            Все репозитории на GitHub
+          </a>
         </motion.div>
       </div>
     </div>

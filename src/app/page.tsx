@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Code, Star, GitFork, ExternalLink } from 'lucide-react';
 import { GithubIcon } from '@/components/icons';
 import { useEffect, useState } from 'react';
-import { basePath } from '@/lib/config';
 
 interface GitHubRepo {
   id: number;
@@ -122,7 +121,7 @@ export default function HomePage() {
 
   return (
     <div className="relative">
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="min-h-[85vh] flex items-center justify-center px-4">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
@@ -136,7 +135,6 @@ export default function HomePage() {
             </div>
           </motion.div>
 
-          {/* Logo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -144,7 +142,7 @@ export default function HomePage() {
             className="mb-8"
           >
             <Image
-              src={`${basePath}/logo.png`}
+              src="/logo.png"
               alt="DegraSoft"
               width={96}
               height={96}

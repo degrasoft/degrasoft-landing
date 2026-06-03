@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 export default function GradientBlobs() {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-      {/* Violet blob */}
       <motion.div
         className="absolute w-[600px] h-[600px] rounded-full opacity-[0.04]"
         style={{
@@ -25,7 +24,6 @@ export default function GradientBlobs() {
         }}
       />
 
-      {/* Cyan blob */}
       <motion.div
         className="absolute w-[500px] h-[500px] rounded-full opacity-[0.03]"
         style={{
@@ -45,7 +43,6 @@ export default function GradientBlobs() {
         }}
       />
 
-      {/* Small violet accent */}
       <motion.div
         className="absolute w-[300px] h-[300px] rounded-full opacity-[0.03]"
         style={{

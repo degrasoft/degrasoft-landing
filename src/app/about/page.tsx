@@ -41,7 +41,6 @@ export default function AboutPage() {
   return (
     <div className="px-4 py-16 sm:py-24">
       <div className="max-w-3xl mx-auto">
-        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -56,7 +55,6 @@ export default function AboutPage() {
           </p>
         </motion.div>
 
-        {/* Description */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -67,7 +65,7 @@ export default function AboutPage() {
           <div className="text-zinc-400 leading-relaxed space-y-4">
             <p>
               DegraSoft — это не корпорация, не стартап с оценкой в миллиарды и не скучный офис.
-              Это команда людей, которые делают софт для стримеров и их зрителей. Потому что можем. И потому что Existing решения
+              Это команда людей, которые делают софт для стримеров и их зрителей. Потому что можем. И потому что существующие решения
               либо тормозят, либо стоят денег, либо и то, и другое.
             </p>
             <p>
@@ -81,7 +79,6 @@ export default function AboutPage() {
           </div>
         </motion.div>
 
-        {/* Principles */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -111,7 +108,6 @@ export default function AboutPage() {
           </div>
         </motion.div>
 
-        {/* How we work */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -136,7 +132,6 @@ export default function AboutPage() {
           </div>
         </motion.div>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

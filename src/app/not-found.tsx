@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Home } from 'lucide-react';
 
 export default function NotFound() {
   return (
@@ -14,7 +13,6 @@ export default function NotFound() {
           href="/"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-medium hover:opacity-90 transition-opacity"
         >
-          <Home className="w-4 h-4" />
           На главную
         </Link>
       </div>

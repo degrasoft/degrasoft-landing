@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Plus, Coffee, Brain, Music, Gamepad2, Send, Users, ExternalLink } from 'lucide-react';
 import { GithubIcon } from '@/components/icons';
 import { useEffect, useState } from 'react';
-import { basePath } from '@/lib/config';
 
 interface GitHubMember {
   id: number;
@@ -32,7 +31,6 @@ function MemberCard({ member, index }: { member: GitHubMember; index: number }) 
       transition={{ duration: 0.4, delay: 0.15 + index * 0.1 }}
       className="glass-card p-6 flex flex-col items-center text-center group hover:border-violet-500/30 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-violet-500/5"
     >
-      {/* Avatar */}
       <div className="relative mb-4">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -84,7 +82,6 @@ export default function TeamPage() {
   return (
     <div className="px-4 py-16 sm:py-24">
       <div className="max-w-3xl mx-auto">
-        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -99,17 +96,15 @@ export default function TeamPage() {
           </p>
         </motion.div>
 
-        {/* Org card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="glass-card p-8 mb-8 text-center"
         >
-          {/* Logo */}
           <div className="w-24 h-24 rounded-2xl mx-auto mb-4 overflow-hidden shadow-lg shadow-violet-500/20">
             <Image
-              src={`${basePath}/logo.png`}
+              src="/logo.png"
               alt="DegraSoft"
               width={96}
               height={96}
@@ -138,7 +133,6 @@ export default function TeamPage() {
           </div>
         </motion.div>
 
-        {/* Members section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -172,7 +166,6 @@ export default function TeamPage() {
           )}
         </motion.div>
 
-        {/* Join CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -210,7 +203,6 @@ export default function TeamPage() {
           </div>
         </motion.div>
 
-        {/* Bottom text */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

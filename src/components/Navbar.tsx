@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SearchDialog from './SearchDialog';
-import { basePath } from '@/lib/config';
 
 const navLinks = [
   { href: '/', label: 'Главная' },
@@ -23,13 +22,12 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-40 bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <Link
             href="/"
             className="flex items-center gap-2.5 text-lg font-bold hover:opacity-80 transition-opacity"
           >
             <Image
-              src={`${basePath}/logo.png`}
+              src="/logo.png"
               alt="DegraSoft"
               width={32}
               height={32}
@@ -38,7 +36,6 @@ export default function Navbar() {
             <span className="gradient-text">DegraSoft</span>
           </Link>
 
-          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
@@ -51,7 +48,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Search + Mobile toggle */}
           <div className="flex items-center gap-2">
             <SearchDialog />
             <button
@@ -65,7 +61,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div

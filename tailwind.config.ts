@@ -11,11 +11,6 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        card: "var(--card)",
-        "card-border": "var(--card-border)",
-        "accent-violet": "var(--accent-violet)",
-        "accent-cyan": "var(--accent-cyan)",
-        muted: "var(--muted)",
       },
     },
   },

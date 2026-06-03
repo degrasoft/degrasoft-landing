@@ -38,7 +38,6 @@ export default function MatrixBackground() {
     let width = window.innerWidth;
     let height = window.innerHeight;
     const fontSize = 14;
-    // Initialize rain columns
     let columns: RainColumn[] = [];
 
     function initColumns() {
@@ -60,7 +59,6 @@ export default function MatrixBackground() {
       }
     }
 
-    // Word assembly state
     const wordAssemblies: WordAssembly[] = [];
     let nextWordTime = Date.now() + 3000 + Math.random() * 7000;
 
@@ -75,7 +73,6 @@ export default function MatrixBackground() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Randomly change a char in a column
     function randomCharChange() {
       if (columns.length === 0) return;
       const col = columns[Math.floor(Math.random() * columns.length)];
@@ -106,22 +103,18 @@ export default function MatrixBackground() {
     function draw() {
       if (!ctx || !canvas) return;
 
-      // CRITICAL: Clear the canvas completely each frame — no trail stains!
       ctx.clearRect(0, 0, width, height);
 
       const now = Date.now();
 
-      // Trigger word assembly
       if (now >= nextWordTime) {
         triggerWordAssembly();
       }
 
-      // Randomly change some characters each frame
       for (let i = 0; i < 3; i++) {
         randomCharChange();
       }
 
-      // Draw rain columns
       ctx.font = `${fontSize}px monospace`;
 
       for (const col of columns) {
@@ -131,18 +124,14 @@ export default function MatrixBackground() {
           const row = headRow - t;
           const py = row * fontSize;
 
-          // Skip if off screen
           if (py < -fontSize || py > height + fontSize) continue;
 
-          // Opacity fades along the trail
           const fade = 1 - t / col.length;
           const charIdx = ((row % col.chars.length) + col.chars.length) % col.chars.length;
 
           if (t === 0) {
-            // Head character — slightly brighter, cyan tint
             ctx.fillStyle = `rgba(6, 182, 212, ${0.07 * fade})`;
           } else {
-            // Trail — green, very subtle
             const opacity = 0.05 * fade;
             if (opacity < 0.005) continue;
             ctx.fillStyle = `rgba(34, 197, 94, ${opacity})`;
@@ -151,17 +140,14 @@ export default function MatrixBackground() {
           ctx.fillText(col.chars[charIdx], col.x, py);
         }
 
-        // Move column down
         col.y += col.speed;
 
-        // Reset when fully off screen
         if ((headRow - col.length) * fontSize > height) {
           col.y = -col.length * fontSize - Math.random() * 300;
           col.speed = 0.4 + Math.random() * 0.8;
         }
       }
 
-      // Draw word assemblies
       for (let w = wordAssemblies.length - 1; w >= 0; w--) {
         const wa = wordAssemblies[w];
         wa.age++;
@@ -171,7 +157,6 @@ export default function MatrixBackground() {
           continue;
         }
 
-        // Calculate opacity based on age
         let opacity = 0;
         if (wa.age < wa.fadeInAge) {
           opacity = (wa.age / wa.fadeInAge) * 0.2;
@@ -183,12 +168,10 @@ export default function MatrixBackground() {
 
         if (opacity <= 0.005) continue;
 
-        // Draw each character of the word
         for (let c = 0; c < wa.word.length; c++) {
           const x = wa.col * fontSize;
           const y = (wa.startRow + c) * fontSize;
 
-          // Glow effect
           ctx.shadowColor = `rgba(139, 92, 246, ${opacity * 0.6})`;
           ctx.shadowBlur = 10;
 

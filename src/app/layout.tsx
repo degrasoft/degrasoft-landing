@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: "DegraSoft — Пишем код, пока все стримят",
   description: "DegraSoft — команда, которая делает инструменты для стримеров и не только. Open source проекты для стрим-комьюнити.",
   icons: {
-    icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/favicon.ico`,
+    icon: '/favicon.ico',
   },
 };
 
