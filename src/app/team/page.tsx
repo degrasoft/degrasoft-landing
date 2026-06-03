@@ -68,15 +68,37 @@ export default function TeamPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://api.github.com/orgs/degrasoft/members')
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setMembers(data);
-        }
+    // 1. Try pre-fetched data from build time (public/data/team.json)
+    fetch('/data/team.json')
+      .then((r) => {
+        if (!r.ok) throw new Error('No pre-fetched data');
+        return r.json();
       })
-      .catch(() => setMembers([]))
-      .finally(() => setLoading(false));
+      .then((data: GitHubMember[]) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setMembers(data);
+          setLoading(false);
+          return;
+        }
+        // If pre-fetched data is empty, try live GitHub API
+        return fetchLiveMembers();
+      })
+      .catch(() => {
+        // JSON file not available (dev mode, etc.) — fall back to live API
+        return fetchLiveMembers();
+      });
+
+    function fetchLiveMembers() {
+      fetch('https://api.github.com/orgs/degrasoft/members')
+        .then((r) => r.json())
+        .then((data) => {
+          if (Array.isArray(data)) {
+            setMembers(data);
+          }
+        })
+        .catch(() => setMembers([]))
+        .finally(() => setLoading(false));
+    }
   }, []);
 
   return (

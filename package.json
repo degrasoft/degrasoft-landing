@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/fetch-team.mjs && next build",
+    "build:only": "next build",
+    "fetch-team": "node scripts/fetch-team.mjs",
     "start": "next start",
     "lint": "next lint"
   },
